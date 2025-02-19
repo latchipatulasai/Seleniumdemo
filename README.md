@@ -42,7 +42,7 @@ new to selenium,It has record and playback functionality (Reusability of code),i
 
     Testing is handled by the remote control
    
-Framework used for selenium webdriver:
+# Framework used for selenium webdriver:
 In different lanuages , you have different frameworks available to implment selenium webdriver for Nunit for C# ,PyUnit int python etc.
 Here we will be working with JAVA , so frameworks used are 
 1)Junit(Unit testing frameworks)
@@ -70,7 +70,7 @@ If one test method is there  BC->B->Test1->A->AC
 If two or more test methods are there  BC->B->Test1->A->B->Test2->A->AC or BC->B->Test2->A->B->Test1->A->AC
 
    
-WebDriver interface Methods:
+# WebDriver interface Methods:
 
 1)get("") ->Opens the URl of AUT
 2)navigate() ->
@@ -88,7 +88,7 @@ WebDriver interface Methods:
 •	for stopping the execution for some time you can make use of Thread.sleep() method.
 
 -------------------------------------------------------------------
-Locators 
+# Locators 
 
 Locators are the identifiers which identify or locate the web elements uniquely on the web page.
 
@@ -170,26 +170,59 @@ Example: driver.findElement(By.cssSelector("input#body_txtUserID"))
 •	selectByIndex(1) 
 •	selectByValue(“1”) 
 •	selectByVisibleText(“Credit Card”)
-5.	Check box  click()
-6.	Radio button  click()
-7.	Input file  sendKeys(image path)
-8.	Text Message  getText()
+code:
+  WebElement dd = driver.findElement(By.id("body_cph_MyAccount_ddlStatusType"));
+		
+		Select s1 = new Select(dd);
+		
+//		s1.selectByIndex(3);
+		
+		s1.selectByValue("R");
+		
+		Thread.sleep(3000);
+		s1.selectByName
+6.	Check box  click()
+7.	Radio button  click()
+8.	Input file  sendKeys(image path)
+9.	Text Message  getText()
 
-9.	WebTable  It is a webElement in HTML page embedded with table tag. (driver.findelement())
+10.	WebTable  It is a webElement in HTML page embedded with table tag. (driver.findelement())
 •	Rows  tr tag. (table.findelements())
 	Headers  th tag. (table.findelements())
 	Data td tag. (row.findelements())
 
-10.	 Frame  It is a WebElement in HTML page embedded with frame tag. 
+11.	 Frame  It is a WebElement in HTML page embedded with frame tag. 
    http://10.82.181.42/Automation/DemoApps-Playgroundversion/FrameExample.html
 
-11.	MouseHover  It is a WebElement. To access it we need to hover over it.
+     driver.switchTo().Frame();
+   	 
+13.	MouseHover  It is a WebElement. To access it we need to hover over it.
 •	Object of Actions class is required.
 
-12.	Draggable and Droppable WebElements  These elements are handled by Actions class.
+    WebElement hover = driver.findElement(By.xpath("//*[@id=\"form1\"]/div[2]/div/div/div/button"));
+
+		Actions act = new Actions(driver);
+
+		act.moveToElement(hover)
+				.moveToElement(driver.findElement(By.xpath("//*[@id=\"form1\"]/div[2]/div/div/div/div/a[2]")))
+				.click()
+				.build().perform();
+		
+		Thread.sleep(3000);
+
+15.	Draggable and Droppable WebElements  These elements are handled by Actions class.
 http://10.82.181.42/Automation/DemoApps-Playgroundversion/Drag'N'Drop.html
 
-13.	Dynamic Web elements
+	WebElement dragElement = driver.findElement(By.id("draggable"));
+		WebElement dropElement = driver.findElement(By.id("droppable"));
+		
+		Actions act = new Actions(driver);
+		
+		act.dragAndDrop(dragElement, dropElement).perform();
+		
+		Thread.sleep(3000);
+
+17.	Dynamic Web elements
 
 PopUps  It is a new window open to give some information or to get the confirmation.
 http://10.82.181.42/Automation/DemoApps-Playgroundversion/PopupBox.html
@@ -208,11 +241,16 @@ http://10.82.181.42/Automation/DemoApps-Playgroundversion/PopupBox.html
 •	It is applicable globally means for all the web elements.
 •	It’s not applicable for dropdowns and dynamic web elements
 
-2.	Explicit wait
+driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
+3.	Explicit wait
 •	This strategy is handled by WebDriverWait  class.
 •	You can make the execution wait for maximum fixed time if any exception occurs during execution.
 •	It is application on the particular element only.    
 
+WebDriverWait waitFor = new WebDriverWait(driver, 40);
+		waitFor.until(ExpectedConditions.visibilityOfElementLocated(By.id("lblMessage4")))
+  
      
 # Assertions
 Assertion is a criteria to decide whether a test is passed or not. It Is handled by Assert class.
@@ -234,44 +272,18 @@ Assertion Methods
 4.	assertNotNull(variable)
 5.	assertNull(variable)
 
-Wait strategies 
-1.	Implicit wait
-•	You can make the execution wait for maximum fixed time if any exception occurs during execution.
-•	Suppose we give implicit wait of 10 seconds and element is loaded on the page within 2 seconds, it will ignore remaining 10 seconds. That’s why it known as dynamic wait.
-•	It is applicable globally means for all the web elements.
-•	It’s not applicable for dropdowns and dynamic web elements
 
-2.	Explicit wait
-•	This strategy is handled by WebDriverWait  class.
-•	You can make the execution wait for maximum fixed time if any exception occurs during execution.
-•	It is application on the particular element only.       
-Assertions
-Assertion is a criteria to decide whether a test is passed or not. It Is handled by Assert class.
-
-1. Hard Assert
-•	Controlled by Assert class.
-•	It will stop the execution wherever test case failed.
-•	It is available in Junit and TestNG both frameworks.
-
-2. Soft Assert
-•	Controlled by object of SoftAssert class.
-•	It will not stop the execution until the execution of assertAll() method.
-•	It is available in TestNG only.
-
-Assertion Methods
-1.	assertEqual(expMsg, actMsg)  It will check for exact match in both the strings
-2.	assertTrue(condition)  If condition is true then it will say true else false
-3.	assertFalse(condition)  If condition is false then it will say true else false
-4.	assertNotNull(variable)
-5.	assertNull(variable)
-
-
-Window Handling
+# Window Handling
 When multiple windows are open, to switch to the required window.
 •	getWindowHandles() method is used for getting the control over all the tabs(windows).
 
+Set<String> windows = driver.getWindowHandles();
+		String reqUrl = "http://10.82.180.36/Common/AboutUs.aspx";
+		for (String w : windows) {
+			driver.switchTo().window(w);
+   
 
-Parameterization:
+# Parameterization:
 A technique of providing one or more data to test method.
 
 1.	Excel parameterization  
@@ -289,11 +301,14 @@ A technique of providing one or more data to test method.
 	fos.close();
 	fis.close();
 
-Screenshot:
+# Screenshot:
 TakesScreenshot ts = (TakesScreenshot) driver;                                            // Allowing the driver to take screenshot
 File source = ts.getScreenshotAs(OutputType.FILE);                                    //It Will take the screenshot as FILE output
 File destination = new File("C:\\Users\\pradeep.sen\\Music\\SeleniumResources_ScG\\Screenshot\\User.PNG");
 FileUtils.copyFile(source, destination);
+
+other way:
+
 _____________________________________________________________________________________________
 
 Junit Suite:
