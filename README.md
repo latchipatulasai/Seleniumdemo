@@ -304,4 +304,39 @@ public class JUnitTestSuite {}                                                  
 
 
 ----------------------------------
+TestNG Framework
+
+TestNg Framework  It is an extended version of Junit Framework with some advanced features. 
+
+Features:
+1.	To produce reports.
+2.	Advanced annotations
+3.	Order of execution can be controlled
+4.	Parameterization can also be done by inbuilt annotations
+5.	Parallel execution( Not there in the syllabus )
+
+TestNg Annotations:
+![image](https://github.com/user-attachments/assets/0c707e5c-498f-4717-9b84-a82e29191cd4)
+
+TestNG Attributes:
+To add more flexibility and customization to the execution flow of test methods, you have attributes of @Test annotation. Let us discuss few of those attributes.
+![image](https://github.com/user-attachments/assets/8d7f2cf3-6f2b-4b69-be1f-8fdb179219c0)
+
+Parameterization 
+A technique of providing the data to test method.
+
+Ways 
+1.	Data Provider  It is providing the data from object method (Array) to test method.
+•	It is using @DataProvider annotation.
+•	It is using dataProvider TestNG attribute.
+
+2.	Xml parameterization 
+•	To perform cross browsing testing.
+•	To pass parameters from xml file to test methods.
+For example:
+<parameter name = "browserPath" value = "D:\\IVS_FILES\\ChromeDriver111\\chromedriver.exe"></parameter>
+<parameter name = "url" value = "http://10.82.180.36/Common/Login.aspx"></parameter>
+•	Always run the xml file as TestNG suite to execute respective test class.
+3.	Excel parameterization 
+Already discussed in Junit framework.
 
