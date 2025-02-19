@@ -349,8 +349,8 @@ Ways 
 •	To perform cross browsing testing.
 •	To pass parameters from xml file to test methods.
 For example:
-<parameter name = "browserPath" value = "D:\\IVS_FILES\\ChromeDriver111\\chromedriver.exe"></parameter>
-<parameter name = "url" value = "http://10.82.180.36/Common/Login.aspx"></parameter>
+  <parameter name = "browserPath" value = "D:\\IVS_FILES\\ChromeDriver111\\chromedriver.exe"></parameter>
+  <parameter name = "url" value = "http://10.82.180.36/Common/Login.aspx"></parameter>
 •	Always run the xml file as TestNG suite to execute respective test class.
 3.	Excel parameterization 
 Already discussed in Junit framework.
